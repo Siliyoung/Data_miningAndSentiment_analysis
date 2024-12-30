@@ -85,7 +85,7 @@ if __name__ == '__main__':
             })
             # 保存文件
             result_data.to_csv(f"data/result_{id}_{address}.csv", encoding='utf-8', index=False)
-            print(f"数据已保存至 CSV 文件: result_{id}.csv")
+            print(f"数据已保存至 CSV 文件: result_{id}_{address}.csv")
 
             # 清空数据列表，准备抓取下一个景区
             timeList.clear()

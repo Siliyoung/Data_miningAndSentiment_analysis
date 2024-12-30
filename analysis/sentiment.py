@@ -3,7 +3,7 @@ from snownlp import SnowNLP
 import os
 
 # 设置预处理数据目录和情感分析结果保存目录
-pre_data_dir = 'pre_data'
+pre_data_dir = 'processed_data'
 analysis_data_dir = 'analysis_data'
 
 # 如果情感分析结果保存目录不存在，则创建
@@ -21,12 +21,17 @@ for file_name in os.listdir(pre_data_dir):
         # 情感分析
         def sentiment_analysis(text):
             s = SnowNLP(text)
-            if s.sentiments > 0.5:
-                return 'positive'
-            elif s.sentiments < 0.5 and s.sentiments > 0:
-                return 'neutral'
-            else:
-                return 'negative'
+            # 二分类
+            score = s.sentiments
+            # 根据情感分数进行二分类
+            return 'positive' if score > 0.5 else 'negative'
+            # 三分类
+            # if s.sentiments > 0.5:
+            #     return 'positive'
+            # elif s.sentiments < 0.5 and s.sentiments > 0:
+            #     return 'neutral'
+            # else:
+            #     return 'negative'
 
         # 应用情感分析函数
         df['sentiment'] = df['comments'].apply(sentiment_analysis)
